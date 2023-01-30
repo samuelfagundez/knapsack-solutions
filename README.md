@@ -21,7 +21,6 @@ El problema consiste en meter en la mochila ítems de tal forma que se **maximic
 
 El problema se puede expresar matemáticamente por medio del siguiente programa lineal
 
-![Screenshot from 2023-01-30 18-44-17](https://user-images.githubusercontent.com/36381930/215613237-98634044-90b2-4685-9ea8-262152fc49d5.png)
-
+![Screenshot from 2023-01-30 18-45-10](https://user-images.githubusercontent.com/36381930/215613324-874ae4e5-8299-4a04-a514-2afbea832c93.png)
 
 Si q i = 1  para  i = 1 , 2 , . . . , n  se dice que se trata del **problema de la mochila 0-1**. Si uno o más  q i  es infinito entonces se dice que se trata del **problema de la mochila no acotado** también llamado a veces **problema de la mochila entera**. En otro caso se dice que se trata del **problema de la mochila acotado**
