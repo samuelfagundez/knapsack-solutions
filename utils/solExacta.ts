@@ -11,10 +11,10 @@ type Objeto = {
 /** Conjunto de elementos disponibles para ingresar en la mochila. */
 const elementosDisponibles: Objeto[] = [
 	{ id: 'lapiz', peso: 1, valor: 1 },
-	{ id: 'lapiz', peso: 1, valor: 1 },
-	{ id: 'lapiz', peso: 0.5, valor: 1 },
+	{ id: 'lapiz2', peso: 1, valor: 1 },
+	{ id: 'lapiz3', peso: 0.5, valor: 1 },
 	{ id: 'boli', peso: 2, valor: 2 },
-	{ id: 'boli', peso: 0.8, valor: 2 },
+	{ id: 'boli2', peso: 0.8, valor: 2 },
 	{ id: 'color', peso: 1.5, valor: 1.5 }
 ];
 
@@ -41,6 +41,9 @@ const mochila: Mochila = {
 	objetos_remanentes: new Set([...elementosDisponibles])
 };
 
+/** Para evitar errores de referencias generamos referencias de objetos_remanentes y objetos_seleccionados
+ *  nuevos con los mismos objetos dentro.
+ */
 const copiarMochila = (mochila: Mochila) => {
 	const nuevosObjetosRemanentes: Set<Objeto> = new Set();
 	const nuevosObjetosSeleccionados: Set<Objeto> = new Set();
@@ -58,7 +61,7 @@ const copiarMochila = (mochila: Mochila) => {
 };
 
 // Este es el output
-const mochilas_terminadas: Mochila[] = [];
+let mochilas_terminadas: Mochila[] = [];
 
 const main = (): void => {
 	/** Iniciamos un arreglo de mochilas que será un arreglo
@@ -68,6 +71,10 @@ const main = (): void => {
 	let mochilasQueue: Mochila[];
 	/** Iniciamos el arreglo de mochilas con la instancia inicial */
 	mochilasQueue = [copiarMochila(mochila)];
+	/** Valor minimo encontrado mientras se explora */
+	let valor_minimo: number = 0;
+	/** Peso minimo encontrado mientras se explora */
+	let peso_minimo: number = Infinity;
 	/** Mientras hayan estados con los que seguir agregando objetos */
 	while (mochilasQueue.length) {
 		/** Tomamos la primera mochila del arreglo. */
@@ -75,7 +82,6 @@ const main = (): void => {
 		/** Generamos un estado (mochila) nuevo simulando que se selecciona cada uno
 		 * de los objetos remanentes para el estado actual
 		 */
-		const restoreMochila = mochilaActual;
 		for (const objeto of mochilaActual.objetos_remanentes.keys()) {
 			/** Generamos la copia del estado actual */
 			const copiaMochila = copiarMochila(mochilaActual);
@@ -95,18 +101,32 @@ const main = (): void => {
 				copiaMochila.valor_total += objeto.valor;
 				/** Agregamos el estado al arreglo de estados para que pueda volver a ser usado. */
 				mochilasQueue.push({ ...copiaMochila });
-			} else {
 				/** Si no se pueden agregar el objeto actual se cierra esa mochila para ese objeto. */
-				mochilas_terminadas.push({ ...copiaMochila });
+			} else {
+				/** Si el estado final encontrado es mejor o igual que el mejor que hayamos encontrado entonces es válido. */
+				if (
+					copiaMochila.valor_total > valor_minimo ||
+					(copiaMochila.valor_total === valor_minimo &&
+						copiaMochila.peso_total < peso_minimo)
+				) {
+					peso_minimo = copiaMochila.peso_total;
+					valor_minimo = copiaMochila.valor_total;
+					mochilas_terminadas = [{ ...copiaMochila }];
+				} else if (
+					copiaMochila.valor_total === valor_minimo &&
+					copiaMochila.peso_total === peso_minimo
+				) {
+					mochilas_terminadas.push({ ...copiaMochila });
+				}
 			}
 		}
 	}
 
 	/**
 	 * Aqui encontramos todos los estados (mochilas) cuyo valor de valor_total
-	 * sea máximo.
+	 * sea máximo y el peso sea mínimo.
 	 */
-	const mochilasDeValorMaximo = mochilas_terminadas.reduce(
+	const mochilasDeValorMaximoYPesoMinimo = mochilas_terminadas.reduce(
 		/** Revisamos todas las mochilas */
 		(mochilasGuardadas: Mochila[], mochilaEnRevision: Mochila) => {
 			if (mochilasGuardadas.length) {
@@ -119,16 +139,29 @@ const main = (): void => {
 				) {
 					mochilasGuardadas = [{ ...mochilaEnRevision }];
 					/** Si la mochila actual tiene el mismo valor que la primera mochila de las mochilas que llevamos
-					 * guardadas entonces la agregamos a lista.
+					 * guardadas y el peso es el mismo entonces la agregamos a lista.
 					 */
 				} else if (
 					mochilasGuardadas[0].valor_total ===
-					mochilaEnRevision.valor_total
+						mochilaEnRevision.valor_total &&
+					mochilasGuardadas[0].peso_total ===
+						mochilaEnRevision.peso_total
 				) {
 					mochilasGuardadas = [
 						...mochilasGuardadas.slice(0),
 						{ ...mochilaEnRevision }
 					];
+					/**
+					 * Si la mochila actual tiene el mismo valor pero un peso menor que la primera mochila de las mochilas
+					 * que llevamos guardadas entonces encontramos una mejor solucion asi que rehacemos la lista.
+					 */
+				} else if (
+					mochilasGuardadas[0].valor_total ===
+						mochilaEnRevision.valor_total &&
+					mochilasGuardadas[0].peso_total >
+						mochilaEnRevision.peso_total
+				) {
+					mochilasGuardadas = [{ ...mochilaEnRevision }];
 				}
 			} else {
 				/** Si no hay mochilas guardadas iniciamos la lista */
@@ -139,8 +172,31 @@ const main = (): void => {
 		[]
 	);
 
+	/** Valor solucion para las mochilas */
+	const valorMaximo = mochilasDeValorMaximoYPesoMinimo[0].valor_total;
+	/** Peso solucion para las mochilas */
+	const pesoMinimo = mochilasDeValorMaximoYPesoMinimo[0].peso_total;
+	/** Objetos a seleccionar para la solucion (repetidos)
+	 *  Formateados a string para ser impresos
+	 */
+	const soluciones = mochilasDeValorMaximoYPesoMinimo
+		.map((mochila) => [...mochila.objetos_seleccionados])
+		.map((solucion) =>
+			solucion
+				.map((objeto) => objeto.id)
+				.sort()
+				.join(',')
+		);
+	/** Soluciones sin repetir */
+	let solucionesFinales: Set<string> = new Set();
+	for (const solucion of soluciones) {
+		solucionesFinales.add(solucion);
+	}
 	// Print resultado
-	console.log('mochilas finales', mochilasDeValorMaximo);
+	console.log('Resultado:');
+	console.log('Valor máximo:', valorMaximo);
+	console.log('Peso mínimo:', pesoMinimo);
+	console.log('objetos finales', [...solucionesFinales]);
 };
 
 main();
