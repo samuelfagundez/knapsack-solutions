@@ -26,4 +26,8 @@ El problema se puede expresar matemáticamente por medio del siguiente programa 
 Si q i = 1  para  i = 1 , 2 , . . . , n  se dice que se trata del **problema de la mochila 0-1**. Si uno o más  q i  es infinito entonces se dice que se trata del **problema de la mochila no acotado** también llamado a veces **problema de la mochila entera**. En otro caso se dice que se trata del **problema de la mochila acotado**
 
 ## Benchmark
-https://www.sciencedirect.com/science/article/pii/S2772941922000072
+[benchmark.pdf](https://github.com/samuelfagundez/knapsack-solutions/files/10686529/benchmark.pdf)
+
+
+
+
