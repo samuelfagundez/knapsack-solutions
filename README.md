@@ -29,5 +29,6 @@ Si q i = 1  para  i = 1 , 2 , . . . , n  se dice que se trata del **problema de 
 [benchmark.pdf](https://github.com/samuelfagundez/knapsack-solutions/files/10686529/benchmark.pdf)
 
 
+![Screenshot from 2023-02-07 21-27-52](https://user-images.githubusercontent.com/36381930/217559032-79bd8614-0241-4c2e-955b-e8699d3f9f9c.png)
 
 
