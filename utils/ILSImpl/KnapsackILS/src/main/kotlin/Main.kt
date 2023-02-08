@@ -5,8 +5,8 @@ fun main(args: Array<String>) {
         Item(weight = 30, value = 120),
     )
 
-    val knapsack = Knapsack(items, maxWeight = 50)
+    val knapsack = Knapsack(items, maxWeight = 30)
     val solution = knapsack.solve()
 
-    println(solution.sumOf { it.value })
+    println(solution.sumOf { total -> total.value })
 }

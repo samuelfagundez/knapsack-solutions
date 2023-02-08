@@ -1,22 +1,21 @@
 class Knapsack(private val items: List<Item>, private val maxWeight: Int) {
 
     fun solve(): List<Item> {
-        var currentSolution = generateInitialSolution()
-        var currentValue = evaluate(currentSolution)
+        var bestSolution = generateInitialSolution()
+        var bestValue = evaluate(bestSolution)
 
-        var bestSolution = currentSolution
-        var bestValue = currentValue
+        var currentSolution = generateInitialSolution()
+        var currentValue = bestValue
 
         while (true) {
             val neighborhood = generateNeighborhood(currentSolution)
             val neighbor = neighborhood.maxBy { evaluate(it) } ?: break
-
-            if (evaluate(neighbor) > currentValue) {
+            if (evaluate(neighbor) >= currentValue) {
                 currentSolution = neighbor
                 currentValue = evaluate(neighbor)
-            } else if (evaluate(neighbor) > bestValue) {
-                bestSolution = neighbor
-                bestValue = evaluate(neighbor)
+            } else if (currentValue > bestValue) {
+                bestSolution = currentSolution
+                bestValue = currentValue
             } else {
                 break
             }
@@ -36,6 +35,11 @@ class Knapsack(private val items: List<Item>, private val maxWeight: Int) {
     }
 
     private fun evaluate(solution: List<Item>): Int {
-        return solution.sumOf { it.value }
+        val totalWeight = solution.sumOf { it.weight }
+        return if (totalWeight <= maxWeight) {
+            solution.sumOf { it.value }
+        } else {
+            0
+        }
     }
 }
