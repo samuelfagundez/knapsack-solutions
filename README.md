@@ -9,6 +9,9 @@ Este es un problema NP-Completo establecido por Richard Karp en 1972, forma part
 
 Un ejemplo sería: dada una mochila con una capacidad de 15 kg que puedo llenar con cajas de distinto peso y valor, ¿qué cajas elijo de modo de maximizar mis ganancias y no exceder los 15 kg de peso permitidos? Las cajas son: (12kg, $4), (2kg, $2), (1kg,$2), (4kg, $10).
 
+![375px-Knapsack svg](https://user-images.githubusercontent.com/36381930/217559432-4c63140e-0970-48fe-82ee-34165ccd9e5e.png)
+
+
 ### Definición formal del problema
 
 Supongamos que tenemos n distintos tipos de ítems, que van del 1 al n. De cada tipo de ítem se tienen  q i  ítems disponibles, donde  q i  es un entero positivo que cumple 1 ≤ q i < ∞  .
