@@ -9,9 +9,8 @@ Este es un problema NP-Completo establecido por Richard Karp en 1972, forma part
 
 Un ejemplo sería: dada una mochila con una capacidad de 15 kg que puedo llenar con cajas de distinto peso y valor, ¿qué cajas elijo de modo de maximizar mis ganancias y no exceder los 15 kg de peso permitidos? Las cajas son: (12kg, $4), (2kg, $2), (1kg,$2), (4kg, $10).
 
-![375px-Knapsack svg](https://user-images.githubusercontent.com/36381930/217559432-4c63140e-0970-48fe-82ee-34165ccd9e5e.png)
-
-
+<img src="https://user-images.githubusercontent.com/20999799/217559333-93291ece-f3ea-4a23-a92d-f8e147e4ad4a.jpg" width="1000" height="600" alt="Fuerza Bruta">
+<img src="https://user-images.githubusercontent.com/20999799/217559750-74693688-e7b6-4237-983b-8fc3c9e3fb5c.png" width="1000" height="600" alt="Fuerza Bruta">
 ### Definición formal del problema
 
 Supongamos que tenemos n distintos tipos de ítems, que van del 1 al n. De cada tipo de ítem se tienen  q i  ítems disponibles, donde  q i  es un entero positivo que cumple 1 ≤ q i < ∞  .
@@ -29,9 +28,4 @@ El problema se puede expresar matemáticamente por medio del siguiente programa 
 Si q i = 1  para  i = 1 , 2 , . . . , n  se dice que se trata del **problema de la mochila 0-1**. Si uno o más  q i  es infinito entonces se dice que se trata del **problema de la mochila no acotado** también llamado a veces **problema de la mochila entera**. En otro caso se dice que se trata del **problema de la mochila acotado**
 
 ## Benchmark
-[benchmark.pdf](https://github.com/samuelfagundez/knapsack-solutions/files/10686529/benchmark.pdf)
-
-
-![Screenshot from 2023-02-07 21-27-52](https://user-images.githubusercontent.com/36381930/217559032-79bd8614-0241-4c2e-955b-e8699d3f9f9c.png)
-
-
+https://www.sciencedirect.com/science/article/pii/S2772941922000072
