@@ -31,6 +31,10 @@ Además, la clase incluye funciones privadas que ayudan a encontrar la solución
 1. Descargue el repositorio en su computadora.
 2. Abra el proyecto en su IDE preferido.
 3. Ejecute la clase `Knapsack` para ver la solución al problema de la mochila.
+### Ejecutar por consola
+Ir a la carpeta Main de kotlin y ejecutar los siguientes comandos:
+1. kotlinc Main.kt Knapsack.kt Item.kt -include-runtime -d knapsack.jar
+2. java -jar knapsack.jar
 
 ## Consideraciones adicionales
 
