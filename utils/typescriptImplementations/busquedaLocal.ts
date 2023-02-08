@@ -23,6 +23,34 @@ const elementosDisponibles: Objeto[] = [
   { id: "borra", peso: 3.5, valor: 1 },
 ];
 
+const elementosDisponibles2: Objeto[] = [
+  { id: "agua", peso: 2, valor: 1 },
+  { id: "sacapuntas", peso: 1, valor: 2.5 },
+  { id: "desayuno", peso: 5, valor: 5 },
+  { id: "regla_plastico", peso: 1.5, valor: 0.5 },
+  { id: "borra2", peso: 1.8, valor: 1 },
+  { id: "lapiz3", peso: 0.5, valor: 1 },
+  { id: "boli", peso: 2, valor: 2 },
+  { id: "borra3", peso: 1, valor: 1 },
+  { id: "almuerzo", peso: 8, valor: 6 },
+  { id: "carpeta", peso: 1, valor: 5 },
+  { id: "color", peso: 1.5, valor: 1.5 },
+  { id: "lapiz", peso: 1, valor: 1 },
+  { id: "regla_metal", peso: 3, valor: 3 },
+  { id: "cartuchera2", peso: 1, valor: 2.5 },
+  { id: "merienda", peso: 2.3, valor: 5 },
+  { id: "hojas", peso: 0.2, valor: 0.7 },
+  { id: "boli2", peso: 0.8, valor: 2 },
+  { id: "borra", peso: 3.5, valor: 1 },
+  { id: "lapiz2", peso: 1, valor: 1 },
+  { id: "borra4", peso: 0.5, valor: 0.5 },
+  { id: "cena", peso: 5, valor: 3 },
+  { id: "cartuchera", peso: 5, valor: 5 },
+  { id: "calculadora", peso: 1.3, valor: 10 },
+  { id: "jugo", peso: 2, valor: 2 },
+  { id: "dinero", peso: 0.1, valor: 4 },
+];
+
 type Mochila = {
   peso_total: number;
   valor_total: number;
@@ -116,7 +144,7 @@ const mochila: Mochila = {
   peso_total: 0,
   valor_total: 0,
   objetos_seleccionados: new Set(),
-  objetos_remanentes: new Set([...elementosDisponibles]),
+  objetos_remanentes: new Set([...elementosDisponibles2]),
 };
 
 // generarSolucionInicial([copiarMochila(mochila)]);
