@@ -6,6 +6,7 @@
 	"scripts": {
 		"local": "ts-node ./busquedaLocal.ts",
 		"exacta": "ts-node ./solExacta.ts",
+		"exacta-dp": "ts-node ./solExactaDP.ts",
 		"generarEjemplos": "ts-node ./generarEspacio.ts"
 	},
 	"dependencies": {
